@@ -10,7 +10,7 @@ export default async function DashboardPage() {
     <>
       <DashboardHeader
         heading="Dashboard"
-        // text={`Current Role : ${user?.role} — Change your role in settings.`}
+        text={`Current Role : ${user?.role} — Change your role in settings.`}
       />
       <EmptyPlaceholder>
         <EmptyPlaceholder.Icon name="post" />

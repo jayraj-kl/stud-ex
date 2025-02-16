@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { sidebarLinks } from "@/constants/dashboard";
+import { sidebarLinks } from "@/config/dashboard";
 import { getCurrentUser } from "@/lib/session";
 import { SearchCommand } from "@/components/dashboard/search-command";
 import {
@@ -22,8 +22,9 @@ export default async function Dashboard({ children }: ProtectedLayoutProps) {
 
   const filteredLinks = sidebarLinks.map((section) => ({
     ...section,
-    items: section.items.filter(
-      ({ authorizeOnly }) => !authorizeOnly || authorizeOnly === user.role
+    items: (section.items ?? []).filter(
+      ({ authorizeOnly }: { authorizeOnly?: string }) =>
+        !authorizeOnly || authorizeOnly === user.role
     ),
   }));
 
