@@ -1,8 +1,5 @@
 "use client";
 
-// import { scrollToBottom, initialMessages, getSources } from "@/lib/utils";
-// import { ChatLine } from "./chat-line";
-
 import { ChatBubble } from "./chat-bubble";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -11,7 +8,7 @@ import { Message, useChat } from "ai/react";
 import { initialMessages, scrollToBottom } from "@/lib/utils";
 import { useEffect, useRef } from "react";
 
-export function Chat() {
+export function ChattingWindow() {
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
       initialMessages,
@@ -37,7 +34,7 @@ export function Chat() {
           />
 
           <Button type="submit" className="w-24">
-            {isLoading ? <Spinner /> : "Ask"}
+            {isLoading ? <Spinner /> : ""}
             Ask
           </Button>
         </form>

@@ -21,17 +21,36 @@ type ProjectType = {
 
 const projects: ProjectType[] = [
   {
-    title: "Project 1",
-    slug: "project-number-one",
-    color: "bg-red-500",
+    title: "FY-Btech-CSE",
+    slug: "FY-CSE Semester - I",
+    color: "bg-rose-500",
   },
   {
-    title: "Project 2",
-    slug: "project-number-two",
+    title: "FY-Btech-CSE",
+    slug: "FY-CSE Semester - II",
     color: "bg-blue-500",
   },
+  {
+    title: "SY-Btech-CSE",
+    slug: "SY-CSE Semester - I",
+    color: "bg-green-500",
+  },
+  {
+    title: "SY-Btech-CSE",
+    slug: "SY-CSE Semester - II",
+    color: "bg-purple-500",
+  },
+  {
+    title: "TY-Btech-CSE",
+    slug: "TY-CSE Semester - I",
+    color: "bg-amber-500",
+  },
+  {
+    title: "TY-Btech-CSE",
+    slug: "TY-CSE Semester - II",
+    color: "bg-cyan-500",
+  },
 ];
-const selected: ProjectType = projects[1];
 
 export default function ProjectSwitcher({
   large = false,
@@ -40,6 +59,7 @@ export default function ProjectSwitcher({
 }) {
   const { data: session, status } = useSession();
   const [openPopover, setOpenPopover] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(projects[0]); // Initialize with first project
 
   if (!projects || status === "loading") {
     return <ProjectSwitcherPlaceholder />;
@@ -58,17 +78,17 @@ export default function ProjectSwitcher({
               <div
                 className={cn(
                   "size-3 shrink-0 rounded-full",
-                  selected.color,
+                  selectedProject.color
                 )}
               />
               <div className="flex items-center space-x-3">
                 <span
                   className={cn(
                     "inline-block truncate text-sm font-medium xl:max-w-[120px]",
-                    large ? "w-full" : "max-w-[80px]",
+                    large ? "w-full" : "max-w-[80px]"
                   )}
                 >
-                  {selected.slug}
+                  {selectedProject.slug}
                 </span>
               </div>
             </div>
@@ -80,9 +100,10 @@ export default function ProjectSwitcher({
         </PopoverTrigger>
         <PopoverContent align="start" className="max-w-60 p-2">
           <ProjectList
-            selected={selected}
+            selected={selectedProject}
             projects={projects}
             setOpenPopover={setOpenPopover}
+            setSelectedProject={setSelectedProject}
           />
         </PopoverContent>
       </Popover>
@@ -94,50 +115,45 @@ function ProjectList({
   selected,
   projects,
   setOpenPopover,
+  setSelectedProject,
 }: {
   selected: ProjectType;
   projects: ProjectType[];
   setOpenPopover: (open: boolean) => void;
+  setSelectedProject: (project: ProjectType) => void;
 }) {
   return (
     <div className="flex flex-col gap-1">
-      {projects.map(({ slug, color }) => (
+      {projects.map((project) => (
         <Link
-          key={slug}
+          key={project.slug}
           className={cn(
             buttonVariants({ variant: "ghost" }),
-            "relative flex h-9 items-center gap-3 p-3 text-muted-foreground hover:text-foreground",
+            "relative flex h-9 items-center gap-3 p-3 text-muted-foreground hover:text-foreground"
           )}
           href="#"
-          onClick={() => setOpenPopover(false)}
+          onClick={() => {
+            setSelectedProject(project);
+            setOpenPopover(false);
+          }}
         >
-          <div className={cn("size-3 shrink-0 rounded-full", color)} />
+          <div className={cn("size-3 shrink-0 rounded-full", project.color)} />
           <span
             className={`flex-1 truncate text-sm ${
-              selected.slug === slug
+              selected.slug === project.slug
                 ? "font-medium text-foreground"
                 : "font-normal"
             }`}
           >
-            {slug}
+            {project.slug}
           </span>
-          {selected.slug === slug && (
+          {selected.slug === project.slug && (
             <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-foreground">
               <Check size={18} aria-hidden="true" />
             </span>
           )}
         </Link>
       ))}
-      <Button
-        variant="outline"
-        className="relative flex h-9 items-center justify-center gap-2 p-2"
-        onClick={() => {
-          setOpenPopover(false);
-        }}
-      >
-        <Plus size={18} className="absolute left-2.5 top-2" />
-        <span className="flex-1 truncate text-center">New Project</span>
-      </Button>
     </div>
   );
 }
