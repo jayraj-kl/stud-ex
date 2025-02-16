@@ -1,0 +1,24 @@
+import Email from "@/emails";
+import { env } from "@/lib/config";
+import { Resend } from "resend";
+
+const resend = new Resend(env.RESEND_API_KEY);
+
+export async function POST() {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "Acme <onboarding@resend.dev>",
+      to: ["jayrajdoingcool9@gmail.com"],
+      subject: "Hello world",
+      react: Email(),
+    });
+
+    if (error) {
+      return Response.json({ error }, { status: 500 });
+    }
+
+    return Response.json(data);
+  } catch (error) {
+    return Response.json({ error }, { status: 500 });
+  }
+}
