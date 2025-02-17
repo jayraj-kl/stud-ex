@@ -31,13 +31,13 @@ async function createIndex(client: Pinecone, indexName: string) {
 }
 
 // Initialize index and ready to be accessed.
-async function initPineconeClient() {
+async function initPineconeClient(indexName1: string) {
   try {
     const pineconeClient = new Pinecone({
       apiKey: env.PINECONE_API_KEY,
       // environment: env.PINECONE_ENVIRONMENT,
     });
-    const indexName = env.PINECONE_INDEX_NAME;
+    const indexName = indexName1;
     console.log("Index Name:" + indexName);
     if (!/^[a-z0-9-]+$/.test(indexName)) {
       throw new Error(
@@ -61,9 +61,9 @@ async function initPineconeClient() {
   }
 }
 
-export async function getPineconeClient() {
+export async function getPineconeClient(indexName: string) {
   if (!pineconeClientInstance) {
-    pineconeClientInstance = await initPineconeClient();
+    pineconeClientInstance = await initPineconeClient(indexName);
   }
 
   return pineconeClientInstance;

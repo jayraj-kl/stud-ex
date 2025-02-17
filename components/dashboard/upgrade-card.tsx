@@ -6,8 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 export function UpgradeCard() {
+  const router = useRouter();
   return (
     <Card className="md:max-xl:rounded-none md:max-xl:border-none md:max-xl:shadow-none">
       <CardHeader className="md:max-xl:px-4">
@@ -17,7 +19,11 @@ export function UpgradeCard() {
         </CardDescription>
       </CardHeader>
       <CardContent className="md:max-xl:px-4">
-        <Button size="sm" className="w-full">
+        <Button
+          size="sm"
+          className="w-full"
+          onClick={() => router.push("/waitlist")}
+        >
           Upgrade
         </Button>
       </CardContent>

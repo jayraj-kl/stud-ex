@@ -2,10 +2,8 @@
 // import { StreaminTextResponse, experimental_StreamData, LangChainStream } from "ai";
 import { ConversationalRetrievalQAChain } from "langchain/chains";
 import { StreamingTextResponse, LangChainStream } from "ai";
-
 // newer depencies
 // import { createRetrievalChain } from "langchain/chains/retrieval";
-
 import { getVectorStore } from "./vector-store";
 import { getPineconeClient } from "./pinecone-client";
 import { streamingModel, nonStreamingModel } from "./llm";
@@ -14,16 +12,22 @@ import { STANDALONE_QUESTION_TEMPLATE, QA_TEMPLATE } from "./prompt-template";
 type callChainArgs = {
   question: string;
   chatHistory: string;
+  indexName: string;
 };
 
-export async function callChain({ question, chatHistory }: callChainArgs) {
+export async function callChain({
+  question,
+  chatHistory,
+  indexName,
+}: callChainArgs) {
   try {
-    // Open AI recommendation
+    console.log("Question: ", question);
+    console.log("Chat History: ", chatHistory);
+    console.log("Index Name: ", indexName);
     const sanitizedQuestion = question.trim().replaceAll("\n", " ");
-    const pineconeClient = await getPineconeClient();
-    const vectorStore = await getVectorStore(pineconeClient);
+    const pineconeClient = await getPineconeClient(indexName);
+    const vectorStore = await getVectorStore(pineconeClient, indexName);
     const { stream, handlers } = LangChainStream();
-    // const data = new experimental_StreamData();
 
     const chain = ConversationalRetrievalQAChain.fromLLM(
       streamingModel,

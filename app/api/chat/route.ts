@@ -10,14 +10,11 @@ const formatMessage = (message: Message) => {
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
+  const indexName = body.indexName;
+  console.log("indexName", indexName);
   const messages: Message[] = body.messages ?? [];
-  console.log("Messages ", messages);
   const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
-  console.log("Formatted messages ", formattedPreviousMessages);
   const question = messages[messages.length - 1].content;
-  console.log("Question ", question);
-
-  console.log("Chat history ", formattedPreviousMessages.join("\n"));
 
   if (!question) {
     return NextResponse.json("Error: No question in the request", {
@@ -29,6 +26,7 @@ export async function POST(req: NextRequest) {
     const streamingTextResponse = callChain({
       question,
       chatHistory: formattedPreviousMessages.join("\n"),
+      indexName,
     });
 
     return streamingTextResponse;

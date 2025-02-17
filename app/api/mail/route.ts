@@ -4,11 +4,19 @@ import { Resend } from "resend";
 
 const resend = new Resend(env.RESEND_API_KEY);
 
-export async function POST() {
+export async function POST(request: Request) {
+  console.log("POST /api/mail");
   try {
+    const body = await request.json();
+    const { email } = body;
+
+    if (!email) {
+      return Response.json({ error: "Email is required" }, { status: 400 });
+    }
+
     const { data, error } = await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: ["jayrajdoingcool9@gmail.com"],
+      from: "dexterio.org <dexterio@jayrajkl.com>",
+      to: [email],
       subject: "Hello world",
       react: Email(),
     });

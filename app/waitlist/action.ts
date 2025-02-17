@@ -2,6 +2,7 @@
 
 import { env } from "@/lib/config";
 import { formSchema } from "./schema";
+import { sendConfirmationEmail } from "../actions/email";
 
 type FormState = {
   message: string;
@@ -19,7 +20,10 @@ export async function submitWaitlistForm(
   }
 
   try {
-    const response = await fetch(
+    const email = parsed.data.email;
+    const emailResponse = await sendConfirmationEmail(email);
+
+    const routerResponse = await fetch(
       "https://app.router.so/api/endpoints/da40tg0n",
       {
         method: "POST",
@@ -30,12 +34,12 @@ export async function submitWaitlistForm(
         body: JSON.stringify(parsed.data),
       }
     );
-
-    if (!response.ok) {
+    if (!routerResponse.ok) {
+      console.error("Failed to submit form");
       return { message: "Failed to submit form" };
     }
 
-    return { message: "Message sent successfully!" };
+    return { message: "Successfully joined the waitlist!" };
   } catch (error) {
     return { message: "Failed to submit form. Please try again." };
   }

@@ -1,6 +1,7 @@
 import { getPineconeClient } from "@/lib/pinecone-client";
 import { getChunkedDocsFromPDF } from "@/lib/pdf-loader";
 import { embedAndStoreDocs } from "@/lib/vector-store";
+import { env } from "@/lib/config";
 
 // This operation might fail because indexes likely need
 // more time to init, so give some 5 mins after index
@@ -8,7 +9,7 @@ import { embedAndStoreDocs } from "@/lib/vector-store";
 (async () => {
   try {
     console.log("+------------------------------------+");
-    const pineconeClient = await getPineconeClient();
+    const pineconeClient = await getPineconeClient(env.PINECONE_INDEX_NAME);
     console.log("Preparing chunks from PDF file");
     const docs = await getChunkedDocsFromPDF();
     console.log(`Loading ${docs.length} chunks into pinecone...`);

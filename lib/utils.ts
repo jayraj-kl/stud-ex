@@ -13,15 +13,6 @@ export function formattedText(inputText: string) {
     .replace(/\s+/g, " ");
 }
 
-export const initialMessages: Message[] = [
-  {
-    role: "assistant",
-    id: "0",
-    content:
-      "Hi! I am Anshul Patil you personalised tutor. I am happy to help with your questions about Theory of Computation.",
-  },
-];
-
 interface Data {
   sources: string[];
 }
