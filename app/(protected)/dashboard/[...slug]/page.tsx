@@ -4,9 +4,9 @@ import { FileUploadDemo } from "@/components/file-upload";
 // app/(protected)/dashboard/[...slug]/page.tsx
 
 interface ChatParams {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
+  }>;
 }
 
 const getSubjectExpertise = (slug: string[]): string => {
@@ -25,7 +25,8 @@ const getSubjectExpertise = (slug: string[]): string => {
   }
 };
 
-export default async function Chat({ params }: ChatParams) {
+export default async function Chat(props: ChatParams) {
+  const params = await props.params;
   // Make the component async
   const { slug } = params;
   const name = slug[0].charAt(0).toUpperCase() + slug[0].slice(1);
