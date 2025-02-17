@@ -15,10 +15,10 @@ export async function embedAndStoreDocs(
 
     //embed the PDF documents
     const store = await PineconeStore.fromDocuments(docs, embeddings, {
-      //@ts-ignore
       pineconeIndex: index,
       textKey: "text",
     });
+    console.log(store);
   } catch (error) {
     console.log("error ", error);
     throw new Error("Failed to load your docs !");
@@ -32,7 +32,6 @@ export async function getVectorStore(client: Pinecone, indexName: string) {
     const index = client.Index(indexName);
 
     const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
-      //@ts-ignore
       pineconeIndex: index,
       textKey: "text",
     });

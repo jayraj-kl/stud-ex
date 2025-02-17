@@ -22,6 +22,7 @@ export async function submitWaitlistForm(
   try {
     const email = parsed.data.email;
     const emailResponse = await sendConfirmationEmail(email);
+    console.log(emailResponse);
 
     const routerResponse = await fetch(
       "https://app.router.so/api/endpoints/da40tg0n",
@@ -40,7 +41,7 @@ export async function submitWaitlistForm(
     }
 
     return { message: "Successfully joined the waitlist!" };
-  } catch (error) {
+  } catch {
     return { message: "Failed to submit form. Please try again." };
   }
 }

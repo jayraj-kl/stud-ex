@@ -45,17 +45,9 @@ export const FileUpload = ({
       }
     });
 
-    onChange && onChange(newFiles);
-  };
-
-  const removeFile = (index: number) => {
-    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-    setPreviews((prevPreviews) => {
-      const newPreviews = [...prevPreviews];
-      URL.revokeObjectURL(newPreviews[index]);
-      newPreviews.splice(index, 1);
-      return newPreviews;
-    });
+    if (onChange) {
+      onChange(newFiles);
+    }
   };
 
   const handleClick = () => {

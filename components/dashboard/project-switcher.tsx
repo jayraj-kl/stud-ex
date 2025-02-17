@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, ChevronsUpDown, Plus } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
@@ -57,7 +57,7 @@ export default function ProjectSwitcher({
 }: {
   large?: boolean;
 }) {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const [openPopover, setOpenPopover] = useState(false);
   const [selectedProject, setSelectedProject] = useState(projects[0]); // Initialize with first project
 

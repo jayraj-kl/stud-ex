@@ -1,6 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Message } from "ai";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,10 +10,6 @@ export function formattedText(inputText: string) {
     .replace(/\n+/g, " ")
     .replace(/(\w) - (\w)/g, "$1$2")
     .replace(/\s+/g, " ");
-}
-
-interface Data {
-  sources: string[];
 }
 
 export function scrollToBottom(containerRef: React.RefObject<HTMLDivElement>) {

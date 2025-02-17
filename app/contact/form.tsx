@@ -51,7 +51,8 @@ export function ContactForm() {
       <div className="space-y-2 text-center">
         <h2 className="text-3xl font-bold">Contact Us</h2>
         <p className="text-muted-foreground">
-          Fill out the form below and we'll get back to you as soon as possible.
+          Fill out the form below and we&apos;ll get back to you as soon as
+          possible.
         </p>
         {state.message && (
           <div className="inline-block px-3 py-1 rounded-full text-sm bg-green-100 text-green-800">

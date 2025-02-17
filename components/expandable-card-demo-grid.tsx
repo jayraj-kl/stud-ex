@@ -1,22 +1,9 @@
 "use client";
 import Image from "next/image";
-import React, { JSX, useEffect, useId, useRef, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { useRouter } from "next/navigation";
-
-interface Card {
-  description: string;
-  title: string;
-  src: string;
-  ctaText: string;
-  ctaLink: string;
-  content: () => JSX.Element;
-}
-
-interface ExpandableCardDemoProps {
-  cards: Card[];
-}
 
 export default function ExpandableCardDemo() {
   const router = useRouter();
@@ -145,7 +132,7 @@ export default function ExpandableCardDemo() {
         ) : null}
       </AnimatePresence>
       <ul className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 items-start gap-4">
-        {cards.map((card, index) => (
+        {cards.map((card) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
             key={card.title}
@@ -238,7 +225,8 @@ const cards = [
                 href="https://www.amazon.com/Introduction-Theory-Computation-Michael-Sipser/dp/113318779X"
                 target="_blank"
               >
-                "Introduction to the Theory of Computation" by Michael Sipser
+                &quot;Introduction to the Theory of Computation&quot; by Michael
+                Sipser
               </a>
             </li>
             <li>
@@ -281,8 +269,8 @@ const cards = [
                 href="https://www.amazon.com/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1492032646"
                 target="_blank"
               >
-                "Hands-On Machine Learning with Scikit-Learn, Keras, and
-                TensorFlow" by Aurélien Géron
+                &quot;Hands-On Machine Learning with Scikit-Learn, Keras, and
+                TensorFlow&quot; by Aurélien Géron
               </a>
             </li>
             <li>
@@ -314,7 +302,7 @@ const cards = [
         <p>
           Alakh Pandey is a blockchain-focused chatbot that simplifies concepts
           like decentralized ledgers, smart contracts, and consensus algorithms.
-          It's perfect for developers and blockchain enthusiasts. <br /> <br />
+          It&apos;s perfect for developers and blockchain enthusiasts.
           <strong>Popular Resources Built On:</strong>
           <ul>
             <li>
@@ -322,7 +310,7 @@ const cards = [
                 href="https://www.amazon.com/Mastering-Blockchain-Imran-Bashir/dp/1839213191"
                 target="_blank"
               >
-                "Mastering Blockchain" by Imran Bashir
+                &quot;Mastering Blockchain&quot; by Imran Bashir
               </a>
             </li>
             <li>
@@ -362,7 +350,8 @@ const cards = [
                 href="https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321"
                 target="_blank"
               >
-                "Designing Data-Intensive Applications" by Martin Kleppmann
+                &quot;Designing Data-Intensive Applications&quot; by Martin
+                Kleppmann
               </a>
             </li>
             <li>

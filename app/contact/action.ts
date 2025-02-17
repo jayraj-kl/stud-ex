@@ -36,7 +36,7 @@ export async function submitContactForm(
     }
 
     return { message: "Message sent successfully!" };
-  } catch (error) {
+  } catch {
     return { message: "Failed to submit form. Please try again." };
   }
 }
