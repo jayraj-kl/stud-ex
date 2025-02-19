@@ -35,7 +35,6 @@ async function initPineconeClient(indexName1: string) {
   try {
     const pineconeClient = new Pinecone({
       apiKey: env.PINECONE_API_KEY,
-      // environment: env.PINECONE_ENVIRONMENT,
     });
     const indexName = indexName1;
     console.log("Index Name:" + indexName);

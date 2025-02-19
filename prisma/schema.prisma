@@ -77,3 +77,16 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map(name: "verification_tokens")
 }
+
+model Bot {
+  id          String   @id @default(cuid())
+  name        String
+  subject     String
+  description String
+  resources   String
+  pdfPath     String
+  imagePath   String?
+  indexName   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

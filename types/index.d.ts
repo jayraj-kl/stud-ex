@@ -100,3 +100,10 @@ export type TestimonialType = {
   image: string;
   review: string;
 };
+
+export type SidebarNavItem = {
+  title: string;
+  items: NavItem[];
+  authorizeOnly?: UserRole;
+  icon?: keyof typeof Icons;
+};

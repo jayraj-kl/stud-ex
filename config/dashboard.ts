@@ -5,14 +5,22 @@ import { SidebarNavItem } from "@/types";
 export const sidebarLinks: SidebarNavItem[] = [
   {
     title: "MENU",
-    items: [{ href: "/dashboard", icon: "dashboard", title: "Dashboard" }],
+    items: [
+      {
+        href: "/admin",
+        icon: "laptop",
+        title: "Admin Panel",
+        authorizeOnly: UserRole.ADMIN,
+      },
+      { href: "/dashboard", icon: "dashboard", title: "Dashboard" },
+    ],
   },
   {
     title: "OPTIONS",
     items: [
-      { href: "/dashboard/", icon: "settings", title: "Settings" },
+      { href: "/dashboard/settings", icon: "settings", title: "Settings" },
       { href: "/", icon: "home", title: "Homepage" },
-      { href: "/dashboard/", icon: "bookOpen", title: "Documentation" },
+      { href: "/docs", icon: "bookOpen", title: "Documentation" },
       {
         href: "#",
         icon: "messages",
