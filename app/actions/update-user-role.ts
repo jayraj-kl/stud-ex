@@ -35,7 +35,7 @@ export async function updateUserRole(userId: string, data: FormData) {
     revalidatePath("/dashboard/settings");
     return { status: "success" };
   } catch (error) {
-    // console.log(error)
+    console.log(error);
     return { status: "error" };
   }
 }

@@ -19,7 +19,7 @@ const getSubjectExpertise = (slug: string[]): string => {
     case "ashok":
       return "Distributed Cloud Computing";
     default:
-      return "General Knowledge";
+      return "Custom Trained Knowledge";
   }
 };
 

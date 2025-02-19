@@ -13,6 +13,12 @@ export const sidebarLinks: SidebarNavItem[] = [
         authorizeOnly: UserRole.ADMIN,
       },
       { href: "/dashboard", icon: "dashboard", title: "Dashboard" },
+      {
+        href: "/custom",
+        icon: "copy",
+        title: "Custom Bot",
+        authorizeOnly: UserRole.ADMIN,
+      },
     ],
   },
   {

@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Upload } from "lucide-react";
 import { FileUpload } from "@/components/ui/file-upload";
 import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
 
 export function CreateBotCard() {
   const [image, setImage] = useState<File | null>(null);
@@ -96,12 +97,12 @@ export function CreateBotCard() {
       if (!response.ok) {
         throw new Error("Upload failed");
       }
-
-      const data = await response.json();
+      await response.json();
 
       toast({
         title: "Success",
-        description: "Bot created successfully!",
+        description:
+          "Bot created successfully! You might want to wait for a while it's building ;)",
       });
 
       // Reset form
@@ -112,7 +113,7 @@ export function CreateBotCard() {
       setSubject("");
       setDescription("");
       setResources("");
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to create bot. Please try again.",
@@ -146,7 +147,7 @@ export function CreateBotCard() {
             />
             {imagePreview && (
               <div className="mt-2">
-                <img
+                <Image
                   src={imagePreview}
                   alt="Preview"
                   className="w-32 h-32 object-cover rounded-lg"

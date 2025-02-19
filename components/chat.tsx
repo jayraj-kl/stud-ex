@@ -35,7 +35,7 @@ export function ChattingWindow({
       case "distributed cloud computing":
         return "chatbot-ai-dcc";
       default:
-        return "General Knowledge";
+        return "chatbot-ai-custom";
     }
   };
 
