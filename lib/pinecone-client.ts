@@ -1,5 +1,5 @@
 import { Pinecone } from "@pinecone-database/pinecone";
-import { env } from "./config";
+import { env } from "./validations/config";
 import { delay } from "./utils";
 
 let pineconeClientInstance: Pinecone | null = null;

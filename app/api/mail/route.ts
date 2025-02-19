@@ -1,5 +1,5 @@
 import VercelInviteUserEmail from "@/emails";
-import { env } from "@/lib/config";
+import { env } from "@/lib/validations/config";
 import { getUserByEmail } from "@/lib/user";
 import { Resend } from "resend";
 

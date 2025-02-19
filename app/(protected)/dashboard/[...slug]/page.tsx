@@ -1,8 +1,6 @@
 import { ChattingWindow } from "@/components/chat";
 import { FileUploadDemo } from "@/components/file-upload";
 
-// app/(protected)/dashboard/[...slug]/page.tsx
-
 interface ChatParams {
   params: Promise<{
     slug: string[];

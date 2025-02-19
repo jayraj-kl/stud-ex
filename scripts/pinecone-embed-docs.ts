@@ -1,11 +1,8 @@
 import { getPineconeClient } from "@/lib/pinecone-client";
 import { getChunkedDocsFromPDF } from "@/lib/pdf-loader";
 import { embedAndStoreDocs } from "@/lib/vector-store";
-import { env } from "@/lib/config";
+import { env } from "@/lib/validations/config";
 
-// This operation might fail because indexes likely need
-// more time to init, so give some 5 mins after index
-// creation and try again.
 (async () => {
   try {
     console.log("+------------------------------------+");

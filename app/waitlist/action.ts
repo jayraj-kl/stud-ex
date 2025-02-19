@@ -1,6 +1,6 @@
 "use server";
 
-import { env } from "@/lib/config";
+import { env } from "@/lib/validations/config";
 import { formSchema } from "./schema";
 import { sendConfirmationEmail } from "../actions/email";
 

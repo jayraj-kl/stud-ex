@@ -1,7 +1,7 @@
 import { Pool } from "@neondatabase/serverless";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import { PrismaClient } from "@prisma/client";
-import { env } from "@/lib/config";
+import { env } from "@/lib/validations/config";
 
 const connectionString = `${env.DATABASE_URL}`;
 

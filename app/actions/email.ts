@@ -1,5 +1,5 @@
 "use server";
-import { env } from "@/lib/config";
+import { env } from "@/lib/validations/config";
 
 export async function sendConfirmationEmail(email: string) {
   console.log("sendConfirmationEmail", email);
