@@ -84,7 +84,7 @@ export function CreateBotCard() {
           title: "Success",
           description: "Successfully filled in suggestions!",
         });
-      } catch (e) {
+      } catch {
         // If parsing fails, try to use the response directly
         setDescription(data.content);
         toast({
@@ -92,7 +92,7 @@ export function CreateBotCard() {
           description: "Added description, but couldn't parse resources.",
         });
       }
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to get suggestions from Worqhat",
