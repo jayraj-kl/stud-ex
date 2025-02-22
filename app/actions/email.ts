@@ -31,3 +31,55 @@ export async function sendConfirmationEmail(email: string) {
     };
   }
 }
+
+export async function sendConfirmationEmailCustomerCare(
+  email: string,
+  ticketId: string,
+  subject: string,
+  category: string,
+  priority: string,
+  description: string
+) {
+  console.log("sendConfirmationEmail", {
+    email,
+    ticketId,
+    subject,
+    category,
+    priority,
+    description,
+  });
+  try {
+    const response = await fetch(env.NEXTAUTH_URL + "/api/customer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        ticketId,
+        subject,
+        category,
+        priority,
+        description,
+      }),
+    });
+    console.log("response", response);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(
+        `Email API responded with status ${response.status}: ${errorText}`
+      );
+      throw new Error(`Email API responded with status ${response.status}`);
+    }
+
+    const responseData = await response.json();
+    console.log("responseData", responseData);
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending confirmation email:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}

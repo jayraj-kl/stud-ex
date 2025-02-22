@@ -107,3 +107,20 @@ export type SidebarNavItem = {
   authorizeOnly?: UserRole;
   icon?: keyof typeof Icons;
 };
+
+export interface Submission {
+  id: string;
+  subject: string;
+  category: string;
+  priority: Priority;
+  status: Status;
+  imageUrl: string | null;
+  createdAt: string; // ISO date string
+}
+
+export type Priority = "low" | "medium" | "high" | "urgent";
+export type Status = "new" | "inProgress" | "resolved" | "closed";
+
+export interface SubmissionsResponse {
+  data: Submission[];
+}

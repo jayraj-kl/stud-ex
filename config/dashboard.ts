@@ -27,6 +27,7 @@ export const sidebarLinks: SidebarNavItem[] = [
       { href: "/dashboard/settings", icon: "settings", title: "Settings" },
       { href: "/", icon: "home", title: "Homepage" },
       { href: "/docs", icon: "bookOpen", title: "Documentation" },
+      { href: "/dashboard/customercare", icon: "help", title: "Customer Care" },
       {
         href: "#",
         icon: "messages",

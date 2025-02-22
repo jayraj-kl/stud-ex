@@ -17,7 +17,6 @@ import { Button } from "@/components/ui/button";
 import { Upload } from "lucide-react";
 import { FileUpload } from "@/components/ui/file-upload";
 import { useToast } from "@/hooks/use-toast";
-import Image from "next/image";
 
 export function CreateBotCard() {
   const [image, setImage] = useState<File | null>(null);
@@ -125,89 +124,123 @@ export function CreateBotCard() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="px-4 py-6 sm:px-0">
+      {" "}
+      {/* Added padding for mobile */}
       <Card className="w-full max-w-2xl mx-auto">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">
+          <CardTitle className="text-xl sm:text-2xl font-bold">
+            {" "}
+            {/* Responsive font size */}
             Create Your Own Bot
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-sm sm:text-base">
+            {" "}
+            {/* Responsive font size */}
             Fill in the details to create a custom bot
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-4 sm:space-y-6">
+          {" "}
+          {/* Adjusted spacing */}
           <div className="space-y-2">
-            <Label htmlFor="bot-image">Bot Image</Label>
+            <Label htmlFor="bot-image" className="text-sm sm:text-base">
+              Bot Image
+            </Label>
             <Input
               id="bot-image"
               type="file"
               accept="image/*"
               onChange={handleImageUpload}
               required
+              className="text-sm sm:text-base"
             />
             {imagePreview && (
               <div className="mt-2">
-                <Image
+                <img
                   src={imagePreview}
                   alt="Preview"
-                  className="w-32 h-32 object-cover rounded-lg"
+                  className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-lg"
                 />
               </div>
             )}
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="bot-name">Bot Name</Label>
-            <Input
-              id="bot-name"
-              placeholder="Enter bot name"
-              value={botName}
-              onChange={(e) => setBotName(e.target.value)}
-              required
-            />
+          {/* Add responsive classes to other input containers */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {" "}
+            {/* Grid layout for larger screens */}
+            <div className="space-y-2">
+              <Label htmlFor="bot-name" className="text-sm sm:text-base">
+                Bot Name
+              </Label>
+              <Input
+                id="bot-name"
+                placeholder="Enter bot name"
+                value={botName}
+                onChange={(e) => setBotName(e.target.value)}
+                required
+                className="text-sm sm:text-base"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="bot-subject" className="text-sm sm:text-base">
+                Subject
+              </Label>
+              <Input
+                id="bot-subject"
+                placeholder="Enter bot subject"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                required
+                className="text-sm sm:text-base"
+              />
+            </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="bot-subject">Subject</Label>
-            <Input
-              id="bot-subject"
-              placeholder="Enter bot subject"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="bot-description">Description</Label>
+            <Label htmlFor="bot-description" className="text-sm sm:text-base">
+              Description
+            </Label>
             <Textarea
               id="bot-description"
               placeholder="Enter bot description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
+              className="text-sm sm:text-base min-h-[100px]"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="bot-resources">Popular Resources Built On</Label>
+            <Label htmlFor="bot-resources" className="text-sm sm:text-base">
+              Popular Resources Built On
+            </Label>
             <Input
               id="bot-resources"
               placeholder="Enter popular resources"
               value={resources}
               onChange={(e) => setResources(e.target.value)}
               required
+              className="text-sm sm:text-base"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="bot-pdf">PDF Upload</Label>
+            <Label htmlFor="bot-pdf" className="text-sm sm:text-base">
+              PDF Upload
+            </Label>
             <FileUpload onChange={handlePdfUpload} />
             {pdf && (
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Selected: {pdf.name}
               </p>
             )}
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" type="submit" disabled={isLoading}>
-            <Upload className="mr-2 h-4 w-4" />
+          <Button
+            className="w-full text-sm sm:text-base"
+            type="submit"
+            disabled={isLoading}
+          >
+            <Upload className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
             {isLoading ? "Creating..." : "Create Bot"}
           </Button>
         </CardFooter>
