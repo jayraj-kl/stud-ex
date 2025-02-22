@@ -5,7 +5,7 @@ import { getUserByEmail } from "@/lib/user";
 import { Resend } from "resend";
 
 const resend = new Resend(env.RESEND_API_KEY);
-const MANAGER_EMAIL = "jayrajdoingcool9@gmail.com";
+const MANAGER_EMAIL = "aryanlokare25@gmail.com";
 
 export async function POST(request: Request) {
   try {

@@ -38,57 +38,54 @@ export function ChatBubble({
   const wrappedMessage = wrappedText(content);
 
   return (
-    <>
-      <div>
-        <Card className="mb-2">
-          <CardHeader>
-            <CardTitle
-              className={
-                role != "assistant"
-                  ? "text-amber-500 dark:text-amber-200"
-                  : "text-blue-500 dark:text-blue-200"
-              }
-            >
-              {role === "assistant" ? "AI" : "You"}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-sm">
-            <Balancer>{wrappedMessage}</Balancer>
-          </CardContent>
-          <CardFooter>
-            <CardDescription className="w-full">
-              {sources && sources.length ? (
-                <Accordion type="single" collapsible className="w-full">
-                  {sources.map((source, index) => (
-                    <AccordionItem value={`source-${index}`} key={index}>
-                      <AccordionTrigger>{`Source ${
-                        index + 1
-                      }`}</AccordionTrigger>
-                      <AccordionContent>
-                        <ReactMarkdown
-                          components={{
-                            a: ({ ...props }) => (
-                              <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                {...props}
-                              />
-                            ),
-                          }}
-                        >
-                          {formattedText(source)}
-                        </ReactMarkdown>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              ) : (
-                <></>
-              )}
-            </CardDescription>
-          </CardFooter>
-        </Card>
-      </div>
-    </>
+    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Card className="mb-2 w-full">
+        <CardHeader className="p-4 sm:p-6">
+          <CardTitle
+            className={`text-base sm:text-lg ${
+              role != "assistant"
+                ? "text-amber-500 dark:text-amber-200"
+                : "text-blue-500 dark:text-blue-200"
+            }`}
+          >
+            {role === "assistant" ? "AI" : "You"}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="text-xs sm:text-sm p-4 sm:p-6">
+          <Balancer>{wrappedMessage}</Balancer>
+        </CardContent>
+        <CardFooter className="p-4 sm:p-6">
+          <CardDescription className="w-full">
+            {sources && sources.length ? (
+              <Accordion type="single" collapsible className="w-full">
+                {sources.map((source, index) => (
+                  <AccordionItem value={`source-${index}`} key={index}>
+                    <AccordionTrigger className="text-xs sm:text-sm">
+                      {`Source ${index + 1}`}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-xs sm:text-sm">
+                      <ReactMarkdown
+                        components={{
+                          a: ({ ...props }) => (
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="break-words"
+                              {...props}
+                            />
+                          ),
+                        }}
+                      >
+                        {formattedText(source)}
+                      </ReactMarkdown>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            ) : null}
+          </CardDescription>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

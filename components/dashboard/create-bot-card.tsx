@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Upload } from "lucide-react";
+import { Upload, Wand2 } from "lucide-react";
 import { FileUpload } from "@/components/ui/file-upload";
 import { useToast } from "@/hooks/use-toast";
 
@@ -27,7 +27,81 @@ export function CreateBotCard() {
   const [description, setDescription] = useState("");
   const [resources, setResources] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isWorqhatLoading, setIsWorqhatLoading] = useState(false);
   const { toast } = useToast();
+
+  const getWorqhatSuggestions = async () => {
+    if (!subject) {
+      toast({
+        title: "Error",
+        description: "Please enter a subject first",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsWorqhatLoading(true);
+
+    try {
+      const response = await fetch(
+        "https://api.worqhat.com/api/ai/content/v4",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer wh_m7c4wh3qRzjQcqUqaOWW8bPY0UCwsgNMLoWuLUUY",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            question: `Generate a detailed description and list of popular resources for studying ${subject}. Format the response as JSON with keys 'description' and 'resources'.
+            don't pass my anything else. i need the response in following format similar to this
+            {
+            "description": "A comprehensive guide to [subject], covering key concepts such as [key points]. This bot will help students understand [main topics] through interactive discussions and detailed explanations.",
+            "resources": "Khan Academy, MIT OpenCourseWare, Coursera, [Subject]-specific textbooks, Educational YouTube channels like [channel names]"
+            }
+            `,
+            model: "aicon-v4-nano-160824",
+            randomness: 0.5,
+            stream_data: false,
+            training_data:
+              "You are an expert in educational content. Provide detailed and professional responses.",
+            response_type: "text",
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to get suggestions");
+      }
+
+      const data = await response.json();
+
+      try {
+        const parsedData = JSON.parse(data.content);
+        setDescription(parsedData.description);
+        setResources(parsedData.resources);
+
+        toast({
+          title: "Success",
+          description: "Successfully filled in suggestions!",
+        });
+      } catch (e) {
+        // If parsing fails, try to use the response directly
+        setDescription(data.content);
+        toast({
+          title: "Partial Success",
+          description: "Added description, but couldn't parse resources.",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to get suggestions from Worqhat",
+        variant: "destructive",
+      });
+    } finally {
+      setIsWorqhatLoading(false);
+    }
+  };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -194,6 +268,15 @@ export function CreateBotCard() {
                 required
                 className="text-sm sm:text-base"
               />
+              <Button
+                type="button"
+                onClick={getWorqhatSuggestions}
+                disabled={isWorqhatLoading}
+                variant="outline"
+              >
+                <Wand2 className="h-4 w-4 mr-2" />
+                {isWorqhatLoading ? "Loading..." : "Ask Worqhat"}
+              </Button>
             </div>
           </div>
           <div className="space-y-2">

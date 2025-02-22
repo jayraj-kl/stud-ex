@@ -54,21 +54,24 @@ export function ChattingWindow({
   }, [messages]);
   return (
     <>
-      <div className="rounded-2xl border h-[75vh] flex flex-col justify-between">
-        <div className="p-6 overflow-auto" ref={containerRef}>
+      <div className="rounded-2xl border h-[75vh] flex flex-col justify-between w-full max-w-[1200px] mx-auto">
+        <div className="p-2 sm:p-4 md:p-6 overflow-auto" ref={containerRef}>
           {messages.map(({ id, role, content }: Message) => (
             <ChatBubble key={id} role={role} content={content} sources={[]} />
           ))}
         </div>
-        <form onSubmit={handleSubmit} className="p-4 flex clear-both">
+        <form
+          onSubmit={handleSubmit}
+          className="p-2 sm:p-4 flex flex-col sm:flex-row gap-2 clear-both"
+        >
           <Input
             value={input}
             placeholder={"Type to chat with AI..."}
             onChange={handleInputChange}
-            className="mr-2"
+            className="flex-1"
           />
 
-          <Button type="submit" className="w-24">
+          <Button type="submit" className="w-full sm:w-24">
             {isLoading ? <Spinner /> : ""}
             Ask
           </Button>
