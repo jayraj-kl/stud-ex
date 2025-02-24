@@ -207,14 +207,14 @@ export const CloseIcon = () => {
 const cards = [
   {
     description: "Theory of Computation",
-    title: "Mishra",
-    src: "/images.jpg",
+    title: "Preeti",
+    src: "/unnamed.jpg",
     ctaText: "Talk",
     ctaLink: "/dashboard/preeti",
     content: () => {
       return (
         <p>
-          Mishra is a specialized chatbot designed to assist students and
+          Preeti is a specialized chatbot designed to assist students and
           researchers in understanding the complexities of the Theory of
           Computation. It covers topics such as automata theory, computability,
           and complexity theory. <br /> <br />
@@ -252,14 +252,14 @@ const cards = [
   },
   {
     description: "Machine Learning",
-    title: " Alex Smola and S.V.N. Vishwanathan",
-    src: "/images (1).jpg",
+    title: "Rabindra",
+    src: "/Gemini_Generated_Image_vrjt5tvrjt5tvrjt.jpg",
     ctaText: "Talk",
     ctaLink: "/dashboard/rabindra",
     content: () => {
       return (
         <p>
-          Alex Smola is a cutting-edge chatbot tailored for machine learning
+          Rabindra is a cutting-edge chatbot tailored for machine learning
           enthusiasts. It provides insights into supervised and unsupervised
           learning, neural networks, and deep learning techniques. <br /> <br />
           <strong>Popular Resources Built On:</strong>
@@ -293,14 +293,14 @@ const cards = [
   },
   {
     description: "Blockchain Technology",
-    title: "Elad Elrom",
-    src: "/images (2).jpg",
+    title: "Alakh",
+    src: "/Gemini_Generated_Image_yue9psyue9psyue9.jpg",
     ctaText: "Talk",
     ctaLink: "/dashboard/alakh",
     content: () => {
       return (
         <p>
-          Elad Elrom is a blockchain-focused chatbot that simplifies concepts
+          Alakh Pandey is a blockchain-focused chatbot that simplifies concepts
           like decentralized ledgers, smart contracts, and consensus algorithms.
           It&apos;s perfect for developers and blockchain enthusiasts.
           <strong>Popular Resources Built On:</strong>
@@ -333,16 +333,16 @@ const cards = [
   },
   {
     description: "Distributed Cloud Computing",
-    title: "Ratan K. Ghosh",
-    src: "/images (3).jpg",
+    title: "Ashok",
+    src: "/Gemini_Generated_Image_jkc492jkc492jkc4.jpg",
     ctaText: "Talk",
     ctaLink: "/dashboard/ashok",
     content: () => {
       return (
         <p>
-          Ratan K. Ghosh is a chatbot designed to demystify distributed cloud
-          computing. It covers topics like distributed systems, cloud
-          architecture, and scalability. <br /> <br />
+          Ashok is a chatbot designed to demystify distributed cloud computing.
+          It covers topics like distributed systems, cloud architecture, and
+          scalability. <br /> <br />
           <strong>Popular Resources Built On:</strong>
           <ul>
             <li>
