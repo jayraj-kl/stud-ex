@@ -28,3 +28,17 @@ export const getUserById = async (id: string) => {
     return null;
   }
 };
+
+export const verifyCredentials = async (email: string) => {
+  try {
+    const user = await prisma.user.findFirst({
+      where: {
+        email: email,
+      },
+    });
+
+    return user;
+  } catch {
+    return null;
+  }
+};

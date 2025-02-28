@@ -1,13 +1,34 @@
 import "next-auth/jwt";
-import NextAuth from "next-auth";
+import NextAuth, { CredentialsSignin } from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { prisma } from "@/prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { getUserById } from "@/lib/user";
+import { getUserById, verifyCredentials } from "@/lib/user";
+
+class InvalidLoginError extends CredentialsSignin {
+  code = "Invalid identifier or password";
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
-  providers: [Google],
+  providers: [
+    Google,
+    Credentials({
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (credentials.email && credentials.password) {
+          const user = await verifyCredentials(credentials.email as string);
+          console.log(user);
+          return user;
+        }
+        throw new InvalidLoginError();
+      },
+    }),
+  ],
   session: { strategy: "jwt" },
   pages: { signIn: "/login", error: "/error" },
   callbacks: {
